@@ -37,7 +37,7 @@ const PHASES: {
 ];
 
 const KEYS       = PHASES.map(p => p.key);
-const BASE_PRICE = 300;
+const BASE_PRICE = 210;
 
 
 type ClockState = Record<string, string>;
@@ -88,8 +88,22 @@ function isPhaseUnlocked(c: ClockState, key: string): boolean {
 
 function calcPrice(c: ClockState): number {
   const INC: number[][] = [
-    [0,0.28,0],[0,0.20,0.20,0.32],[0,0,0.08],[0,0],[0,0,0,0,0,0,0,0],
-    [0,0],[0,0,0],[0,0],[0,0.08,0.08,0.12],[0,0,0,0.12,0.12],[0,0,0],[0,0.28,0.60],
+    // shape:      circolare/quadrato +0, rettangolo +15%
+    [0,0.15,0],
+    // colorClock: nessuna +0, fumé +12%, bronzo +12%, invecchiato +18%
+    [0,0.12,0.12,0.18],
+    // sandblasting: davanti +0, dietro +0, dietro-nero +6%
+    [0,0,0.06],
+    // indicators, font, layout, indSize, bars — nessun supplemento
+    [0,0],[0,0,0,0,0,0,0,0],[0,0],[0,0,0],[0,0],
+    // perimeter: nessuno +0, esterno +5%, interno +5%, entrambi +8%
+    [0,0.05,0.05,0.08],
+    // hands: tipo1-3 +0, tipo4-5 +10%
+    [0,0,0,0.10,0.10],
+    // colorHands: nessun supplemento
+    [0,0,0],
+    // size: 50cm +0, 80cm +48%, 100cm +110%
+    [0,0.48,1.10],
   ];
   const V = ["a","b","c","d","e","f","g","h"];
   let p   = BASE_PRICE;
