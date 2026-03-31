@@ -172,17 +172,13 @@ export default function BuilderClient() {
             numBase={numBase}
             style={{ filter: "drop-shadow(0 20px 60px rgba(0,0,0,0.55))" }}
           />
-          {/* Zoom hint — fades out after 3s, reappears on hover */}
-          {imageLink.length >= 2 && (
-            <div className="clock-zoom-hint" aria-hidden>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
-              </svg>
-              <span>Ingrandisci</span>
-            </div>
-          )}
+
         </div>
+
+        {/* Tap to zoom caption */}
+        {imageLink.length >= 2 && (
+          <p className="clock-tap-hint" aria-hidden>Tocca l&apos;orologio per ingrandirlo</p>
+        )}
 
         <div className="custom-preview__info">
           <div className="custom-preview__step">
@@ -366,31 +362,17 @@ export default function BuilderClient() {
         .custom-arrow:disabled { opacity:.3; cursor:default; }
         .custom-arrow-counter { font-size:.78rem; color:var(--brown-light); }
 
-        /* Zoom hint — tiny persistent icon bottom-right */
-        .clock-zoom-hint {
-          position: absolute;
-          bottom: .5rem;
-          right: .5rem;
-          display: flex;
-          align-items: center;
-          gap: .25rem;
-          color: rgba(255,255,255,.45);
-          font-size: .55rem;
-          letter-spacing: .06em;
+        /* Tap to zoom caption */
+        .clock-tap-hint {
+          font-size: .6rem;
+          letter-spacing: .1em;
           text-transform: uppercase;
-          pointer-events: none;
-          transition: color .2s;
-        }
-        .clock-zoom-hint svg {
-          opacity: .5;
+          color: rgba(255,255,255,.35);
+          text-align: center;
+          margin: 0;
           flex-shrink: 0;
-        }
-        /* Brighten on parent hover */
-        .custom-preview__clock:hover .clock-zoom-hint {
-          color: rgba(255,255,255,.75);
-        }
-        .custom-preview__clock:hover .clock-zoom-hint svg {
-          opacity: .8;
+          pointer-events: none;
+          user-select: none;
         }
 
         /* Zoom overlay */
