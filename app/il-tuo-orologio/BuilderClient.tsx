@@ -366,38 +366,31 @@ export default function BuilderClient() {
         .custom-arrow:disabled { opacity:.3; cursor:default; }
         .custom-arrow-counter { font-size:.78rem; color:var(--brown-light); }
 
-        /* Zoom hint */
+        /* Zoom hint — tiny persistent icon bottom-right */
         .clock-zoom-hint {
           position: absolute;
-          bottom: .6rem;
-          right: .6rem;
+          bottom: .5rem;
+          right: .5rem;
           display: flex;
           align-items: center;
-          gap: .3rem;
-          background: rgba(255,255,255,.12);
-          backdrop-filter: blur(6px);
-          border: 1px solid rgba(255,255,255,.18);
-          color: rgba(255,255,255,.8);
-          font-size: .6rem;
-          letter-spacing: .08em;
+          gap: .25rem;
+          color: rgba(255,255,255,.45);
+          font-size: .55rem;
+          letter-spacing: .06em;
           text-transform: uppercase;
-          padding: .3rem .55rem;
-          border-radius: 2rem;
           pointer-events: none;
-          /* Fade in, hold 2s, then fade out and stay hidden */
-          animation: hint-lifecycle 4s ease forwards;
+          transition: color .2s;
         }
-        /* Reappear on parent hover */
+        .clock-zoom-hint svg {
+          opacity: .5;
+          flex-shrink: 0;
+        }
+        /* Brighten on parent hover */
         .custom-preview__clock:hover .clock-zoom-hint {
-          opacity: 1;
-          animation: none;
-          transition: opacity .2s;
+          color: rgba(255,255,255,.75);
         }
-        @keyframes hint-lifecycle {
-          0%   { opacity: 0; }
-          15%  { opacity: 1; }
-          70%  { opacity: 1; }
-          100% { opacity: 0; }
+        .custom-preview__clock:hover .clock-zoom-hint svg {
+          opacity: .8;
         }
 
         /* Zoom overlay */
