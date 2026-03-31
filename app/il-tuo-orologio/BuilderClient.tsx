@@ -245,21 +245,40 @@ export default function BuilderClient() {
       )}
 
       <style suppressHydrationWarning>{`
-        .custom-root { display:grid; grid-template-columns:460px 1fr; min-height:calc(100dvh - var(--nav-h)); }
+        .custom-root {
+          display: grid;
+          /* True 50/50 split: dark panel left, light options right.
+             Full viewport — no max-width — like Rolex / Chanel split screens. */
+          grid-template-columns: 50vw 1fr;
+          min-height: calc(100dvh - var(--nav-h));
+        }
 
         /* Preview panel */
-        .custom-preview { background:var(--ink); display:flex; flex-direction:column; align-items:center; padding:2.5rem 2rem 1.5rem; gap:1.25rem; position:sticky; top:var(--nav-h); height:calc(100dvh - var(--nav-h)); overflow:hidden; }
+        .custom-preview { background:var(--ink); display:flex; flex-direction:column; align-items:center; padding:3rem; gap:1.5rem; position:sticky; top:var(--nav-h); height:calc(100dvh - var(--nav-h)); overflow:hidden; }
         .custom-progress { width:100%; height:2px; background:rgba(255,255,255,.1); border-radius:1px; flex-shrink:0; }
         .custom-progress__bar { height:100%; background:var(--gold); border-radius:1px; transition:width .4s ease; }
 
         /* Clock area: fixed square container, clock is object-fit:contain inside */
         .custom-preview__clock {
           flex:1;
-          width:100%;
           min-height:0;
           display:flex;
           align-items:center;
           justify-content:center;
+          overflow:hidden;
+          padding: 1.5rem;
+        }
+        /* Key fix: size from height, not width.
+           height:100% + aspect-ratio = correct square/rect.
+           max-width:100% prevents overflow when container is narrow. */
+        /* ClockCanvas (.cc-root) has width:100% + aspect-ratio inline.
+           Override: size from height so 1:1 clocks never exceed the panel height.
+           max-width:100% prevents overflow when the panel is narrow (tablet). */
+        .custom-preview__clock > div {
+          height: 100% !important;
+          width: auto !important;
+          max-width: 100% !important;
+          /* DO NOT override aspect-ratio — it's set correctly inline by ClockCanvas */
         }
         .custom-preview__info { text-align:center; color:rgba(255,255,255,.6); font-size:.82rem; flex-shrink:0; }
         .custom-preview__step strong { color:white; }
@@ -269,12 +288,21 @@ export default function BuilderClient() {
         .custom-preview__reroll:hover { border-color:rgba(255,255,255,.4); color:rgba(255,255,255,.75); }
 
         /* Configurator panel */
-        .custom-config { display:flex; flex-direction:column; padding:2.5rem; gap:1.5rem; overflow-y:auto; }
+        .custom-config {
+          display: flex; flex-direction: column;
+          padding: 3rem 4rem;
+          gap: 1.5rem;
+          overflow-y: auto;
+          justify-content: center;
+          /* Cap content width for readability; center within the right panel */
+          align-items: flex-start;
+        }
+        .custom-config > * { width: 100%; max-width: 540px; }
         .custom-nav { display:flex; gap:.4rem; flex-wrap:wrap; }
         .custom-nav__dot { width:26px; height:26px; border-radius:50%; border:1.5px solid var(--cream-dark); background:white; cursor:pointer; transition:all .2s; }
         .custom-nav__dot.done   { background:rgba(110,100,89,.15); border-color:var(--brown); }
         .custom-nav__dot.active { background:var(--brown); border-color:var(--brown); box-shadow:0 0 0 3px rgba(110,100,89,.2); }
-        .custom-config__inner { display:flex; flex-direction:column; gap:1.75rem; }
+        .custom-config__inner { display:flex; flex-direction:column; gap:1.75rem; max-width:580px; }
         .custom-config__label { font-family:var(--font-serif); font-size:1.6rem; font-weight:300; line-height:1.1; }
 
         /* Options grid */
@@ -322,8 +350,14 @@ export default function BuilderClient() {
         .zoom-close:hover { color:white; }
 
         @media (max-width:900px) {
-          .custom-root { grid-template-columns:1fr; }
-          .custom-preview { position:static; height:auto; min-height:unset; padding:1.5rem 1.25rem 1rem; }
+          .custom-root { grid-template-columns:1fr; min-height:unset; }
+          .custom-preview {
+            position: static;
+            width: 100%;
+            height: auto;
+            min-height: unset;
+            padding: 1.5rem 1.25rem 1rem;
+          }
           .custom-preview__clock { height:min(55vw,260px); flex:none; width:min(55vw,260px); }
           .custom-config { padding:1.5rem; }
           .opts-grid { grid-template-columns:repeat(auto-fill,minmax(80px,1fr)); gap:.5rem; }
