@@ -279,7 +279,7 @@ export default function BuilderClient() {
 
         /* Options grid */
         .opts-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(96px,1fr)); gap:.75rem; }
-        .opt-card { display:flex; flex-direction:column; align-items:center; gap:.4rem; border:1.5px solid var(--cream-dark); background:white; padding:.5rem .5rem .6rem; cursor:pointer; transition:border-color .15s, background .15s; text-align:center; }
+        .opt-card { display:flex; flex-direction:column; align-items:center; gap:.4rem; border:1.5px solid var(--cream-dark); background:white; padding:.5rem .5rem .6rem; cursor:pointer; transition:border-color .15s, background .15s; text-align:center; color:var(--ink); font-family:var(--font-sans); }
         .opt-card:hover:not(.locked)  { border-color:var(--brown); }
         .opt-card.active { border-color:var(--brown); background:var(--brown); color:white; }
         .opt-card.locked { opacity:.35; cursor:not-allowed; }
@@ -304,7 +304,8 @@ export default function BuilderClient() {
           display:block;
         }
 
-        .opt-card__label { font-size:.72rem; letter-spacing:.03em; line-height:1.2; }
+        .opt-card__label { font-size:.72rem; letter-spacing:.03em; line-height:1.2; color:inherit; }
+        .opt-card__extra  { font-size:.62rem; opacity:.7; color:inherit; }
         .opt-card__extra { font-size:.62rem; opacity:.6; }
 
         /* Navigation */
@@ -322,8 +323,8 @@ export default function BuilderClient() {
 
         @media (max-width:900px) {
           .custom-root { grid-template-columns:1fr; }
-          .custom-preview { position:static; height:auto; min-height:50dvh; }
-          .custom-preview__clock { height:40dvh; flex:none; }
+          .custom-preview { position:static; height:auto; min-height:unset; padding:1.5rem 1.25rem 1rem; }
+          .custom-preview__clock { height:min(55vw,260px); flex:none; width:min(55vw,260px); }
           .custom-config { padding:1.5rem; }
           .opts-grid { grid-template-columns:repeat(auto-fill,minmax(80px,1fr)); gap:.5rem; }
           .opt-card__thumb { height:64px; padding:4px; }
