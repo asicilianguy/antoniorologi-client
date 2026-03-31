@@ -201,7 +201,7 @@ export default function CatalogClient() {
         .clock-card { background:white; cursor:pointer; transition:transform .2s, box-shadow .2s; outline:2px solid transparent; display:flex; flex-direction:column; }
         .clock-card:hover  { transform:translateY(-3px); box-shadow:var(--shadow); }
         .clock-card.active { outline:2px solid var(--brown); }
-        .clock-card__img   { background:var(--cream-dark); padding:1.75rem; aspect-ratio:1; }
+        .clock-card__img   { background:var(--cream-dark); padding:1.75rem; aspect-ratio:1; display:flex; align-items:center; justify-content:center; }
         .clock-card__body  { padding:.85rem 1rem; display:flex; justify-content:space-between; align-items:baseline; border-top:1px solid var(--cream-dark); }
         .clock-card__name  { font-family:var(--font-serif); font-size:.95rem; }
         .clock-card__price { font-size:.75rem; color:var(--muted); }
