@@ -364,18 +364,68 @@ export default function BuilderClient() {
         .zoom-close:hover { color:white; }
 
         @media (max-width:900px) {
+          /* Stack preview on top, config below */
           .custom-root { grid-template-columns:1fr; min-height:unset; }
+
+          /* Preview panel: sticky strip at top of scroll, tall enough to show clock properly */
           .custom-preview {
-            position: static;
+            position: sticky;
+            top: var(--nav-h);
+            z-index: 10;
             width: 100%;
             height: auto;
             min-height: unset;
-            padding: 1.5rem 1.25rem 1rem;
+            padding: 1.25rem 1.25rem .75rem;
+            flex-direction: row;         /* clock left, info+cta right */
+            align-items: center;
+            gap: 1rem;
           }
-          .custom-preview__clock { height:min(55vw,260px); flex:none; width:min(55vw,260px); }
-          .custom-config { padding:1.5rem; }
+
+          /* Clock: big square that fills available height */
+          .custom-preview__clock {
+            flex: 0 0 auto;
+            width:  min(52vw, 240px);
+            height: min(52vw, 240px);
+          }
+          .custom-preview__clock > div {
+            height: 100% !important;
+            width: auto !important;
+            max-width: 100% !important;
+          }
+
+          /* Info column: price + cta stacked vertically on the right */
+          .custom-preview__info {
+            flex: 1;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: .5rem;
+          }
+          .custom-progress {
+            display: none; /* hidden on mobile — dots nav is enough */
+          }
+          .custom-preview__cta  { width: 100%; }
+          .custom-preview__reroll { width: 100%; text-align: center; }
+
+          .custom-config { padding:1.25rem; }
           .opts-grid { grid-template-columns:repeat(auto-fill,minmax(80px,1fr)); gap:.5rem; }
           .opt-card__thumb { height:64px; padding:4px; }
+        }
+
+        /* Extra small: use more of the width for the clock */
+        @media (max-width:480px) {
+          .custom-preview {
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem 1rem .75rem;
+          }
+          .custom-preview__clock {
+            width:  min(75vw, 280px);
+            height: min(75vw, 280px);
+          }
+          .custom-preview__info { text-align: center; width: 100%; }
+          .custom-preview__cta  { width: 100%; justify-content: center; }
+          .custom-preview__reroll { width: 100%; }
         }
       `}</style>
     </div>
