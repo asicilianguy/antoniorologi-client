@@ -1,0 +1,175 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --brown:      #6e6459;
+  --brown-light:#9c7c63;
+  --cream:      #f5f1ec;
+  --cream-dark: #ede8e1;
+  --ink:        #1a1612;
+  --ink-mid:    #3d3530;
+  --muted:      #8a7f78;
+  --gold:       #c8a96e;
+  --white:      #ffffff;
+
+  --font-serif: "Bodoni Moda", Georgia, serif;
+  --font-sans:  "Inter", system-ui, sans-serif;
+
+  --nav-h:      64px;
+  --radius:     2px;
+  --shadow:     0 4px 24px rgba(0,0,0,0.08);
+  --shadow-lg:  0 12px 48px rgba(0,0,0,0.14);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  background:  var(--cream);
+  color:       var(--ink);
+  min-height:  100dvh;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+button { font-family: inherit; cursor: pointer; }
+
+/* ─── Nav ─────────────────────────────────────────────────────────────────── */
+.nav {
+  position:   fixed;
+  top: 0; left: 0; right: 0;
+  height:     var(--nav-h);
+  z-index:    100;
+  display:    flex;
+  align-items: center;
+  justify-content: space-between;
+  padding:    0 2.5rem;
+  background: rgba(245,241,236,0.90);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(110,100,89,0.12);
+}
+.nav__logo {
+  font-family: var(--font-serif);
+  font-size:   1.25rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color:       var(--ink);
+}
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+.nav__link {
+  font-size:   0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color:       var(--muted);
+  transition:  color 0.2s;
+}
+.nav__link:hover { color: var(--ink); }
+.nav__cta {
+  font-size:   0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color:       var(--white);
+  background:  var(--brown);
+  padding:     0.55rem 1.25rem;
+  transition:  background 0.2s, transform 0.15s;
+}
+.nav__cta:hover { background: var(--ink); transform: translateY(-1px); }
+
+/* ─── Footer ──────────────────────────────────────────────────────────────── */
+.footer {
+  background: var(--ink);
+  color:      rgba(255,255,255,0.7);
+  margin-top: 6rem;
+}
+.footer__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2.5rem 3rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 3rem;
+}
+.footer__logo {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  color: white;
+  margin-bottom: 0.75rem;
+}
+.footer__brand p { font-size: 0.83rem; line-height: 1.6; max-width: 300px; }
+.footer__cols { display: flex; gap: 4rem; }
+.footer__cols > div { display: flex; flex-direction: column; gap: 0.6rem; }
+.footer__cols a { font-size: 0.82rem; transition: color 0.2s; }
+.footer__cols a:hover { color: white; }
+.footer__col-title {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 0.4rem;
+}
+.footer__bottom {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  text-align: center;
+  padding: 1.25rem 2.5rem;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.3);
+}
+
+/* ─── Page wrapper ────────────────────────────────────────────────────────── */
+.page { padding-top: var(--nav-h); }
+
+/* ─── Buttons ─────────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.85rem 2rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-dark {
+  background: var(--ink);
+  color: white;
+}
+.btn-dark:hover { background: var(--brown); transform: translateY(-1px); }
+.btn-outline {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--brown);
+}
+.btn-outline:hover { background: var(--brown); color: white; }
+.btn:disabled { opacity: 0.4; cursor: default; transform: none !important; }
+
+/* ─── Section headers ─────────────────────────────────────────────────────── */
+.section-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--ink);
+  margin-top: 0.5rem;
+}
+
+/* ─── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .nav { padding: 0 1.25rem; }
+  .nav__links .nav__link { display: none; }
+  .footer__inner { grid-template-columns: 1fr; }
+  .footer__cols { flex-direction: column; gap: 2rem; }
+}
