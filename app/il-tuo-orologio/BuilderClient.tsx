@@ -170,9 +170,18 @@ export default function BuilderClient() {
           <ClockCanvas
             imageLink={imageLink}
             numBase={numBase}
-           
             style={{ filter: "drop-shadow(0 20px 60px rgba(0,0,0,0.55))" }}
           />
+          {/* Zoom hint — fades out after 3s, reappears on hover */}
+          {imageLink.length >= 2 && (
+            <div className="clock-zoom-hint" aria-hidden>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
+              </svg>
+              <span>Ingrandisci</span>
+            </div>
+          )}
         </div>
 
         <div className="custom-preview__info">
@@ -357,6 +366,40 @@ export default function BuilderClient() {
         .custom-arrow:disabled { opacity:.3; cursor:default; }
         .custom-arrow-counter { font-size:.78rem; color:var(--brown-light); }
 
+        /* Zoom hint */
+        .clock-zoom-hint {
+          position: absolute;
+          bottom: .6rem;
+          right: .6rem;
+          display: flex;
+          align-items: center;
+          gap: .3rem;
+          background: rgba(255,255,255,.12);
+          backdrop-filter: blur(6px);
+          border: 1px solid rgba(255,255,255,.18);
+          color: rgba(255,255,255,.8);
+          font-size: .6rem;
+          letter-spacing: .08em;
+          text-transform: uppercase;
+          padding: .3rem .55rem;
+          border-radius: 2rem;
+          pointer-events: none;
+          /* Fade in, hold 2s, then fade out and stay hidden */
+          animation: hint-lifecycle 4s ease forwards;
+        }
+        /* Reappear on parent hover */
+        .custom-preview__clock:hover .clock-zoom-hint {
+          opacity: 1;
+          animation: none;
+          transition: opacity .2s;
+        }
+        @keyframes hint-lifecycle {
+          0%   { opacity: 0; }
+          15%  { opacity: 1; }
+          70%  { opacity: 1; }
+          100% { opacity: 0; }
+        }
+
         /* Zoom overlay */
         .zoom-overlay { position:fixed; inset:0; background:rgba(0,0,0,.9); z-index:200; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(10px); }
         .zoom-clock { width:min(600px,85vw); }
@@ -367,11 +410,8 @@ export default function BuilderClient() {
           /* Stack preview on top, config below */
           .custom-root { grid-template-columns:1fr; min-height:unset; }
 
-          /* Preview panel: sticky strip at top of scroll, tall enough to show clock properly */
           .custom-preview {
-            position: sticky;
-            top: var(--nav-h);
-            z-index: 10;
+            position: static;
             width: 100%;
             height: auto;
             min-height: unset;
