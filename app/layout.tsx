@@ -29,17 +29,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   );
 }
 
+import MobileNav from "../components/MobileNav";
+
 // ─── Nav ──────────────────────────────────────────────────────────────────────
 function Nav() {
   return (
     <header className="nav">
-      <a href="/" className="nav__logo">Antonio Orologi</a>
+      <a href="/" className="nav__logo">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/photo/logo.png" alt="Antonio Orologi" className="nav__logo-img" />
+      </a>
+      {/* Desktop links */}
       <nav className="nav__links">
         <a href="/i-nostri-orologi" className="nav__link">I nostri orologi</a>
         <a href="/il-tuo-orologio"  className="nav__link">Il tuo orologio</a>
         <a href="https://wa.me/390922437493" target="_blank" rel="noopener noreferrer"
            className="nav__cta">Contattaci</a>
       </nav>
+      {/* Mobile hamburger */}
+      <MobileNav />
     </header>
   );
 }

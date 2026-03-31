@@ -49,11 +49,14 @@ button { font-family: inherit; cursor: pointer; }
   border-bottom: 1px solid rgba(110,100,89,0.12);
 }
 .nav__logo {
-  font-family: var(--font-serif);
-  font-size:   1.25rem;
-  font-weight: 400;
-  letter-spacing: 0.04em;
-  color:       var(--ink);
+  display: flex;
+  align-items: center;
+}
+.nav__logo-img {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0.15); /* renders it dark on the light navbar */
 }
 .nav__links {
   display: flex;
@@ -83,7 +86,6 @@ button { font-family: inherit; cursor: pointer; }
 .footer {
   background: var(--ink);
   color:      rgba(255,255,255,0.7);
-  margin-top: 6rem;
 }
 .footer__inner {
   max-width: 1200px;
@@ -169,7 +171,7 @@ button { font-family: inherit; cursor: pointer; }
 /* ─── Responsive ──────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .nav { padding: 0 1.25rem; }
-  .nav__links .nav__link { display: none; }
+  .nav__links { display: none; }  /* replaced by MobileNav hamburger */
   .footer__inner { grid-template-columns: 1fr; }
   .footer__cols { flex-direction: column; gap: 2rem; }
 }

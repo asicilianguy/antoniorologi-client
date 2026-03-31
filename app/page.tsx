@@ -174,6 +174,43 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── VIDEO SECTION ──────────────────────────────────────────────────────── */}
+      <section className="video-section">
+        <div className="video-section__inner">
+          <div className="video-section__text">
+            <div className="video-section__label">La nostra missione</div>
+            <h2 className="video-section__title">
+              Passione artigianale<br />in ogni dettaglio
+            </h2>
+            <p>
+              Scopri cosa si nasconde dietro ogni orologio Antonio Orologi.
+              Passione, cura, minuziosità e dedizione artigianale — ogni
+              dettaglio racconta la nostra storia.
+            </p>
+            <p>
+              Un viaggio attraverso la nostra arte di creare orologi a specchio
+              che uniscono eleganza italiana e precisione artigianale.
+            </p>
+          </div>
+          <div className="video-section__video">
+            {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+            <video
+              controls
+              autoPlay
+              muted
+              playsInline
+              loop
+              poster="https://res.cloudinary.com/dhd1suzc5/video/upload/v1763632774/videobello.jpg"
+            >
+              <source
+                src="https://res.cloudinary.com/dhd1suzc5/video/upload/v1763632774/videobello.mp4"
+                type="video/mp4"
+              />
+            </video>
+          </div>
+        </div>
+      </section>
+
       {/* ── CUSTOM CTA ────────────────────────────────────────────────────────── */}
       <section className="custom-band">
         <div className="custom-band__photo"
@@ -242,7 +279,7 @@ export default function HomePage() {
         /* ── Hero ───────────────────────────────────────────────────────────── */
         .hero {
           position: relative;
-          height: 100dvh;
+          height: 100vh;
           display: flex; align-items: center; justify-content: center;
           overflow: hidden;
           color: white;
@@ -451,6 +488,16 @@ export default function HomePage() {
         }
         .custom-band p { font-size:.9rem; color:rgba(255,255,255,.75); line-height:1.7; }
 
+
+        /* ── Video section ──────────────────────────────────────────────────────── */
+        .video-section { background:var(--ink); color:white; padding:5rem 2.5rem; }
+        .video-section__inner { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1fr 1.4fr; gap:4rem; align-items:center; }
+        .video-section__label { font-size:.68rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin-bottom:.75rem; }
+        .video-section__title { font-family:var(--font-serif); font-size:clamp(1.8rem,3.5vw,2.8rem); font-weight:300; line-height:1.12; margin-bottom:1.5rem; }
+        .video-section__text p { font-size:.88rem; line-height:1.75; color:rgba(255,255,255,.65); margin-bottom:.75rem; }
+        .video-section__video { border-radius:2px; overflow:hidden; box-shadow:0 24px 64px rgba(0,0,0,.5); border:1px solid rgba(255,255,255,.08); }
+        .video-section__video video { width:100%; height:auto; display:block; max-height:500px; object-fit:cover; }
+
         /* ── Promise band ───────────────────────────────────────────────────── */
         .promise {
           display:grid; grid-template-columns:repeat(4,1fr);
@@ -471,6 +518,8 @@ export default function HomePage() {
           .featured__grid { grid-template-columns:repeat(2,1fr); }
         }
         @media (max-width:768px) {
+          .video-section { padding:3rem 1.25rem; }
+          .video-section__inner { grid-template-columns:1fr; gap:2rem; }
           .pres { grid-template-columns:1fr; }
           .pres--left .pres__photo,
           .pres--left .pres__text  { order:unset; }
